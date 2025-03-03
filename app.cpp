@@ -22,7 +22,7 @@ public:
 	}
 	void timer() override
 	{
-}
+	}
 };
 
 
