@@ -16,58 +16,58 @@ class Maske0 : public Maske
 {
 private:
 public:
-    Maske0(){}
-    void cycle(uint32_t evtc, tUserCEvt *evtv) override
-	{
-    }
-    void timer() override
+	Maske0(){}
+	void cycle(uint32_t evtc, tUserCEvt *evtv) override
 	{
 	}
+	void timer() override
+	{
+}
 };
 
 
 class Application
 {
 private:
-    std::vector<std::unique_ptr<Maske>> masken;
-    uint32_t curPage;
+	std::vector<std::unique_ptr<Maske>> masken;
+	uint32_t curPage;
 public:
-    Application()
-    {
-        masken.push_back(std::make_unique<Maske0>()); // Maske0 hinzufügen
-        
-        SetBuzzer(1, 1, 1, 1);
-    }
-    void Cycle(uint32_t evtc, tUserCEvt *evtv)
-    {
-        menu = keymenu(evtc, evtv, TasteAnzahl, TasteInhalt, dimmTimer);
-        curPage = GetCurrentMaskShown();
-        masken[curPage]->cycle(evtc, evtv);
-    }
-    void Timer(void)
-    {
-        ipFunctions.ProcessFunctions();
-        masken[curPage]->timer();
-    }
+	Application()
+	{
+		masken.push_back(std::make_unique<Maske0>()); // Maske0 hinzufügen
+
+		SetBuzzer(1, 1, 1, 1);
+	}
+	void Cycle(uint32_t evtc, tUserCEvt *evtv)
+	{
+		menu = keymenu(evtc, evtv, TasteAnzahl, TasteInhalt, dimmTimer);
+		curPage = GetCurrentMaskShown();
+		masken[curPage]->cycle(evtc, evtv);
+	}
+	void Timer(void)
+	{
+		ipFunctions.ProcessFunctions();
+		masken[curPage]->timer();
+	}
 };
 Application *application;
 extern "C"
 {
-    int UserCPPInit(uint32_t initFlags)
-    {
-        application = new Application();
-        return 100; // 1s timer
-    }
-    void UserCPPCycle(uint32_t evtc, tUserCEvt *evtv)
-    {
-        application->Cycle(evtc, evtv);
-    }
-    void UserCPPTimer(void)
-    {
-        application->Timer();
-    }
-    void UserCPPDeInit(void)
-    {
-        delete application;
-    }
+	int UserCPPInit(uint32_t initFlags)
+	{
+		application = new Application();
+		return 100; // 1s timer
+	}
+	void UserCPPCycle(uint32_t evtc, tUserCEvt *evtv)
+	{
+		application->Cycle(evtc, evtv);
+	}
+	void UserCPPTimer(void)
+	{
+		application->Timer();
+	}
+	void UserCPPDeInit(void)
+	{
+		delete application;
+	}
 }
