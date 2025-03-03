@@ -16,7 +16,7 @@ class Maske0 : public Maske
 {
 private:
 public:
-	Maske0(){}
+	Maske0() {}
 	void cycle(uint32_t evtc, tUserCEvt *evtv) override
 	{
 	}
@@ -30,7 +30,6 @@ class Application
 {
 private:
 	std::vector<std::unique_ptr<Maske>> masken;
-	uint32_t curPage;
 public:
 	Application()
 	{
@@ -41,13 +40,12 @@ public:
 	void Cycle(uint32_t evtc, tUserCEvt *evtv)
 	{
 		menu = keymenu(evtc, evtv, TasteAnzahl, TasteInhalt, dimmTimer);
-		curPage = GetCurrentMaskShown();
-		masken[curPage]->cycle(evtc, evtv);
+		masken[GetCurrentMaskShown()]->cycle(evtc, evtv);
 	}
 	void Timer(void)
 	{
 		ipFunctions.ProcessFunctions();
-		masken[curPage]->timer();
+		masken[GetCurrentMaskShown()]->timer();
 	}
 };
 Application *application;
