@@ -1,5 +1,4 @@
 /* pagemanager.c
- * Komplettes Beispiel in reinem C14 ohne Zeitfeld in TouchEvent
  */
 
 #include <stdio.h>
