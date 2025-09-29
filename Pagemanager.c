@@ -5,28 +5,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-/* ---- Hardware / OS Stubs ---- */
-typedef enum { TOUCH_DOWN, TOUCH_ON, TOUCH_UP } TouchType;
-
-typedef struct {
-    TouchType type;
-    int x, y;
-} TouchEvent;
-
-int GetMSTick(void) {
-    /* Stub – hier echte Zeitquelle */
-    static int fake = 0;
-    return fake += 16; /* ~60Hz */
-}
-
-void ContainerOnPos(int frame, int x, int y) {
-    printf("ContainerOnPos(frame=%d, x=%d, y=%d)\n", frame, x, y);
-}
-
-void ContainerMove(int frame, int x, int y) {
-    printf("ContainerMove(frame=%d, x=%d, y=%d)\n", frame, x, y);
-}
-
 /* ---- Gesture ---- */
 typedef struct {
     int tx, ty;       /* Sollrichtung */
