@@ -1,7 +1,4 @@
-﻿#include <UserCEvents.h>
 #include <UserCAPI.h>
-#include "vartab.h"
-#include "objtab.h"
 int UserCPPInit(uint32_t initFlags);
 void UserCPPCycle(uint32_t evtc, tUserCEvt *evtv);
 void UserCPPTimer(void);
@@ -20,4 +17,8 @@ void UserCCycle(uint32_t evtc, tUserCEvt *evtv)
 void UserCTimer(void)
 {
 	UserCPPTimer();
+}
+void UserCDeInit(void)
+{
+	UserCPPDeInit();
 }
